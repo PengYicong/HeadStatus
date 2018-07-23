@@ -1,13 +1,13 @@
 % data = xlsread("Hanhan.xlsx");
 % positionnumber = unique(data(:,1:2),"rows");
-data = Hanhan;
+data = Zhuozhuo1;
 max = 5;
 min = -5;
 resolution = 100;
 step = (max-min)/resolution;
 % %grid = zeros(resolution,resolution);
-grid = HeatGen(data,100,100,step,-5);
-imagesc(grid);
+% grid = HeatGen(data,100,100,step,-5);
+% imagesc(grid);
 AngularData = data(:,4:5);
 M = SphereMapGen(AngularData);
 OrientationMap = zeros(180,360);
@@ -36,9 +36,6 @@ for i = 1:180
         end
     end
 end
-
-            
-% OH = HeatGen(OrientationMap,180,360,1,0);
 % imagesc(OH);
 % 
 sphere3d(0.05*OH,-pi,pi,-pi/2,pi/2,0.1,5,'surf','spline',0.1);
