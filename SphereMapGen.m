@@ -1,4 +1,4 @@
-function SphereMap = SphereMapGen(AngularData)
+function GaussianSphereMap = SphereMapGen(AngularData,fignum,sigma)
 %%
 %Preprocess: count the numbers in each sector
     for i = 1:size(AngularData,1)
@@ -43,5 +43,20 @@ function SphereMap = SphereMapGen(AngularData)
             end
         end
     end
-
+    %%
+    %Rotate the map horizontally 180 degree
+    OrientationMap = zeros(180,360);
+    for i = 1:180
+        for j = 1:360
+            if j <= 180
+                OrientationMap(i,j+180) = SphereMap(i,j);
+            else
+                OrientationMap(i,j-180) = SphereMap(i,j);
+            end
+        end
+    end
+    %%
+    %Gaussian Blur
+    GaussianSphereMap = imgaussfilt(OrientationMap,sigma);
+    figure(fignum),imagesc(GaussianSphereMap);
 end
